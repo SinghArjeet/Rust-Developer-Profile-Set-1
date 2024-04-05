@@ -1,0 +1,27 @@
+fn is_prime(num: u32) -> bool {
+  if num <= 1 {
+    return false;
+  }
+  if num <= 3 {
+    return true;
+  }
+
+  // Efficiently check divisibility only by odd numbers from 3 to square root of num
+  let mut i = 3;
+  while i * i <= num {
+    if num % i == 0 {
+      return false;
+    }
+    i += 2;
+  }
+
+  true
+}
+
+fn main() {
+  let numbers = vec![11, 13, 15, 23];
+
+  for number in numbers {
+    println!("{} is {}prime", number, if is_prime(number) { "" } else { "not "});
+  }
+}

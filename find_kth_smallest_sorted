@@ -1,0 +1,21 @@
+fn find_kth_smallest_sorted(arr: &[i32], k: usize) -> Option<i32> {
+  if arr.is_empty() || k == 0 || k > arr.len() {
+    return None;
+  }
+
+  let mut sorted_arr = arr.to_vec();
+  sorted_arr.sort();
+  Some(sorted_arr[k - 1])
+}
+
+fn main() {
+  let numbers = vec![3, 1, 4, 2, 5];
+  let k = 2;
+
+  let kth_smallest = find_kth_smallest_sorted(&numbers, k);
+
+  match kth_smallest {
+    Some(value) => println!("{}th smallest element: {}", k, value),
+    None => println!("Invalid input"),
+  }
+}

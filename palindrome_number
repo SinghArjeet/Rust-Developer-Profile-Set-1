@@ -1,0 +1,23 @@
+fn is_palindrome(text: &str) -> bool {
+  // Convert the string to lowercase and remove non-alphanumeric characters
+  let cleaned_text = text.to_lowercase()
+      .chars()
+      .filter(|c| c.is_alphanumeric())
+      .collect::<String>();
+
+  // Check if the reversed string is equal to the original cleaned string
+  cleaned_text == cleaned_text.chars().rev().collect::<String>()
+}
+
+fn main() {
+  let test_cases = vec![
+    ("racecar", true),
+    ("A man, a plan, a canal: Panama", true),
+    ("Hello, world!", false),
+  ];
+
+  for (text, expected) in test_cases.iter() {
+    println!("Testing: '{}' - Is palindrome: {}", text, is_palindrome(text));
+    assert_eq!(is_palindrome(text), expected);
+  }
+}

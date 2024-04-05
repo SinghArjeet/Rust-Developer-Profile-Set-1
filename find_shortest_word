@@ -1,0 +1,17 @@
+fn find_shortest_word(text: &str) -> Option<&str> {
+  // Split the text into words using an iterator
+  let words = text.split_whitespace();
+
+  // Find the word with the minimum length using min_by
+  words.min_by(|a, b| a.len().cmp(b.len()))
+}
+
+fn main() {
+  let sentence = "This is a string with words of different lengths";
+  let shortest = find_shortest_word(sentence);
+
+  match shortest {
+    Some(word) => println!("Shortest word: {}", word),
+    None => println!("Empty string or no words found"),
+  }
+}

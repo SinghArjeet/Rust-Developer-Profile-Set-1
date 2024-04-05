@@ -1,0 +1,30 @@
+fn find_median(arr: &[i32]) -> Option<f64> {
+  let len = arr.len();
+
+  // Handle empty array case
+  if len == 0 {
+    return None;
+  }
+
+  // Calculate the middle index for even or odd length
+  let middle_idx = len / 2;
+
+  // Median is the single middle element for odd length
+  if len % 2 != 0 {
+    return Some(arr[middle_idx] as f64);
+  }
+
+  // Median is the average of two middle elements for even length
+  let median = (arr[middle_idx - 1] as f64 + arr[middle_idx] as f64) / 2.0;
+  Some(median)
+}
+
+fn main() {
+  let numbers = vec![1, 2, 3, 4, 5];
+  let median = find_median(&numbers);
+
+  match median {
+    Some(value) => println!("Median: {}", value),
+    None => println!("Empty array"),
+  }
+}

@@ -1,0 +1,32 @@
+fn longest_common_prefix(strs: &[String]) -> Option<String> {
+  if strs.is_empty() {
+    return None;
+  }
+
+  let first_str = strs.first().unwrap();
+  let mut prefix = String::new();
+
+  for (i, char) in first_str.chars().enumerate() {
+    for str in strs {
+      if str.len() < i + 1 || str.chars().nth(i).unwrap() != char {
+        return Some(prefix.clone());
+      }
+    }
+    prefix.push(char);
+  }
+
+  Some(prefix)
+}
+
+fn main() {
+  let test_cases = vec![
+    (vec!["flower", "flow", "flight".to_string()], Some("fl".to_string())),
+    (vec!["dog", "racecar", "car".to_string()], None),
+  ];
+
+  for (strs, expected) in test_cases.iter() {
+    let prefix = longest_common_prefix(strs);
+    let prefix_str = prefix.as_ref().map(|s| s.as_str()).unwrap_or("None");
+    println!("Longest common prefix for {:?}: {}", strs, prefix_str);
+  }
+}

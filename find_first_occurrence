@@ -1,0 +1,20 @@
+fn find_first_occurrence(arr: &[i32], target: i32) -> Option<usize> {
+  arr.binary_search_by(|x| match x.cmp(&target) {
+    std::cmp::Ordering::Less => std::cmp::Ordering::Greater,
+    // Equal or greater, move to the left to find the first occurrence
+    _ => std::cmp::Ordering::Less,
+  })
+  .ok()
+}
+
+fn main() {
+  let numbers = vec![1, 2, 3, 3, 4, 5];
+  let target = 3;
+
+  let first_idx = find_first_occurrence(&numbers, target);
+
+  match first_idx {
+    Some(idx) => println!("First occurrence of {} found at index {}", target, idx),
+    None => println!("{} not found in the array", target),
+  }
+}
